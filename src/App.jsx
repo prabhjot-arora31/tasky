@@ -45,8 +45,15 @@ function App() {
     desc: "",
     time: "",
     idOfTask: "",
+    r:'',
+    g:'',
+    b:''
   });
   const addTask = () => {
+    const r1 = Math.floor(Math.random() * 255+1);
+    const g1 = Math.floor(Math.random() * 255+1)
+    const b1 = Math.floor(Math.random() * 255+1)
+    setTask((prev) => {...prev,r:r1, g:g1, b:b1})
     setTasks((prev) => [...prev, task]);
     const storageTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     storageTasks.push(task);
@@ -142,13 +149,15 @@ function App() {
           <div>
             {tasks?.map((task1, id) => {
               return (
-                <>
+                <div style={{
+                  backgroundColor:'rgba('+task1.r+','+task1.g+','+task1.b+','+'0.4)'
+                }}>
                   <div
                     key={id}
                     style={{
                       display: "flex",
                       justifyContent: "space-evenly",
-                      backgroundColor: "lightblue",
+                      
                       maxWidth: "500px",
                       padding: "0.4rem",
                       borderRadius: "10px",
@@ -183,7 +192,7 @@ function App() {
                           alignItems: "center",
                           flexDirection: "column",
                           gap: "6px",
-                          backgroundColor: "lightblue",
+                          
                           margin: "0 auto",
                           maxWidth: "510px",
                           paddingTop: "10px",
@@ -225,7 +234,7 @@ function App() {
                         </button>
                       </div>
                     )}
-                </>
+                </div>
               );
             })}
           </div>
