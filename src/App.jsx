@@ -53,7 +53,7 @@ function App() {
     const r1 = Math.floor(Math.random() * 255+1);
     const g1 = Math.floor(Math.random() * 255+1)
     const b1 = Math.floor(Math.random() * 255+1)
-    setTask((prev) => {...prev,r:r1, g:g1, b:b1})
+    setTask((prev) => { return {...prev,r:r1, g:g1, b:b1}})
     setTasks((prev) => [...prev, task]);
     const storageTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     storageTasks.push(task);
