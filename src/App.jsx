@@ -53,8 +53,11 @@ function App() {
     const r1 = Math.floor(Math.random() * 255+1);
     const g1 = Math.floor(Math.random() * 255+1)
     const b1 = Math.floor(Math.random() * 255+1)
-    setTask((prev) => { return {...prev,r:r1, g:g1, b:b1}})
-    setTasks((prev) => [...prev, task]);
+    setTask((prev) => {
+  const updatedTask = { ...prev, r: r1, g: g1, b: b1 };
+  setTasks((prevTasks) => [...prevTasks, updatedTask]); // Add updated task directly
+  return updatedTask; // Return updated task for state
+});
     const storageTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     storageTasks.push(task);
     localStorage.setItem("tasks", JSON.stringify(storageTasks));
@@ -150,7 +153,7 @@ function App() {
             {tasks?.map((task1, id) => {
               return (
                 <div style={{
-                  backgroundColor:'rgba('+task1.r+','+task1.g+','+task1.b+','+'0.4)'
+                  backgroundColor: `rgba(${task1.r},${task1.g},${task1.b},0.4)`
                 }}>
                   <div
                     key={id}
